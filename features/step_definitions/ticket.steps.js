@@ -23,31 +23,43 @@ Before(async function () {
     });
   });
   
-  When("user select date {string}", async function (string) {
-    return await clickElement(this.page, string);
+  When("user select date tomorrow", async function () {
+    return await clickElement(this.page, "[data-time-stamp = '1705611600']");
+    });
+
+  When("user select movie first", async function () {
+    return await clickElement(this.page, "[data-seance-id = '192']");
   });
 
-  When("user select movie {string}", async function (string) {
-    return await clickElement(this.page, string);
+  When("user select movie second", async function () {
+    return await clickElement(this.page, "[data-seance-id = '190']");
   });
 
-  When("user choose a seat {string}", async function (string) {
-    return await clickElement(this.page, string);
+  When("user choose a standart seat {string}", async function (string) {
+    return await clickElement(this.page,  "[class='buying-scheme__chair buying-scheme__chair_standart']");
   });
 
-  When("user orders ticket {string}", async function (string) {
-    return await clickElement(this.page, string);
+  When("user choose a VIP seat {string}", async function (string) {
+    return await clickElement(this.page, "[class = 'buying-scheme__chair buying-scheme__chair_vip']");
+  });
+
+  When("user choose a disable seat {string}", async function (string) {
+    return await clickElement(this.page, "[class='buying-scheme__chair buying-scheme__chair_disabled']");
+  });
+
+  When("user orders ticket on button {string}", async function (string) {
+    return await clickElement(this.page, "[class='acceptin-button']");
   });
 
   
   Then("user sees button {string}", async function (string) {
-    const actual = await getText(this.page, "body > main > section > div > button");
+    const actual = await getText(this.page, "button");
     const expected = await string;
     expect(actual).contains(expected);
   });
 
   Then("user sees inactive button {string}", async function (string) {
-    const actual = await getText(this.page, "body > main > section > button");
+    const actual = await getText(this.page, "button");
     const expected = await string;
     expect(actual).contains(expected);
   });
